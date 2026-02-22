@@ -16,7 +16,7 @@
 static const SubGhzBlockConst ws_protocol_nexus_homedics_const = {
     .te_short = 500,
     .te_long = 4000,
-    .te_delta = 180,
+    .te_delta = 250,
     .min_count_bit_for_found = 36,
 };
 
