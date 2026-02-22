@@ -184,7 +184,7 @@ void ws_protocol_decoder_nexus_homedics_feed(void* context, bool level, uint32_t
                 (DURATION_DIFF(instance->decoder.te_last, ws_protocol_nexus_homedics_const.te_short) <
                  ws_protocol_nexus_homedics_const.te_delta) &&
                 (DURATION_DIFF(duration, ws_protocol_nexus_homedics_const.te_short * 8) <
-                 ws_protocol_nexus_homedics_const.te_delta * 4)) {
+                 ws_protocol_nexus_homedics_const.te_delta * 8)) {
                 subghz_protocol_blocks_add_bit(&instance->decoder, 1);
                 instance->decoder.parser_step = Nexus_HoMedicsDecoderStepSaveDuration;
             } else {
