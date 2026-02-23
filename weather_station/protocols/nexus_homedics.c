@@ -162,7 +162,11 @@ void ws_protocol_decoder_nexus_homedics_feed(void* context, bool level, uint32_t
                 // Found next frame sync
                 instance->decoder.parser_step = Nexus_HoMedicsDecoderStepReset;
                 if(ws_protocol_nexus_homedics_check(instance)) {
-                    instance->generic.data = instance->decoder.decode_data;
+                    // HoMedics frames are received LSB-first; reverse 36 payload bits
+                    // before reusing Nexus-compatible field extraction.
+                    instance->generic.data = subghz_protocol_blocks_reverse_key(
+                        instance->decoder.decode_data,
+                        ws_protocol_nexus_homedics_const.min_count_bit_for_found);
                     instance->generic.data_count_bit = instance->decoder.decode_count_bit;
                     ws_protocol_nexus_homedics_remote_controller(&instance->generic);
                     if(instance->base.callback)
